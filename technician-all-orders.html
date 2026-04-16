@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/images/image.png">
+    <title>HOME CARE | الطلبات الجديدة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900;950&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/technician-all-orders.css">
+</head>
+<body data-required-role="technician">
+    <div id="navbar-container"></div>
+    <div class="main-content">
+        <div class="container-luxury">
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-clock"></i>
+                    الطلبات الجديدة
+                </h1>
+                <div class="orders-stats" id="ordersStats">
+                    <div class="orders-stat-item">
+                        <div class="orders-stat-number" id="pendingCount">0</div>
+                        <div class="orders-stat-label">في الانتظار</div>
+                    </div>
+                </div>
+            </div>
+            <div class="search-bar">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن طلبك...">
+                    <button class="search-clear" id="searchClear" onclick="clearSearch()" style="display:none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="filters-bar">
+                <button class="filter-btn active" data-category="all" onclick="filterByCategory('all')">
+                    <i class="fas fa-th-large"></i> الكل
+                </button>
+                <button class="filter-btn" data-category="electricity" onclick="filterByCategory('electricity')">
+                    <i class="fas fa-bolt"></i> كهرباء
+                </button>
+                <button class="filter-btn" data-category="plumbing" onclick="filterByCategory('plumbing')">
+                    <i class="fas fa-faucet"></i> سباكة
+                </button>
+                <button class="filter-btn" data-category="carpentry" onclick="filterByCategory('carpentry')">
+                    <i class="fas fa-hammer"></i> نجارة
+                </button>
+                <button class="filter-btn" data-category="painting" onclick="filterByCategory('painting')">
+                    <i class="fas fa-paint-roller"></i> دهان
+                </button>
+            </div>
+            <div class="all-orders-grid" id="allOrdersList">
+            </div>
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-clipboard-list empty-state-icon"></i>
+                <h3 class="empty-state-title">لا توجد طلبات جديدة</h3>
+                <p class="empty-state-desc">لا توجد طلبات في الانتظار حالياً</p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    تفاصيل الطلب
+                </h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/technician-all-orders.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script>
+        fetch('navbar-technician.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
+

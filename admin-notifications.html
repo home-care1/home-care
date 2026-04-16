@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/images/image.png">
+    <title>HOME CARE | إشعارات المدير</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900;950&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/notifications.css">
+</head>
+<body data-required-role="admin">
+
+    <nav class="navbar-luxury">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="index.html">
+                <div class="navbar-logo">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span class="navbar-text">HOME <span>CARE</span></span>
+            </a>
+            <ul class="navbar-menu">
+                <li>
+                    <a class="navbar-link" href="admin-dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i> الرئيسية
+                    </a>
+                </li>
+                <li>
+                    <a class="navbar-link" href="admin-orders.html">
+                        <i class="fas fa-clipboard-list"></i> الطلبات
+                    </a>
+                </li>
+                <li>
+                    <a class="navbar-link" href="admin-technicians.html">
+                        <i class="fas fa-user-cog"></i> الفنيين
+                    </a>
+                </li>
+                <li>
+                    <a class="navbar-link" href="admin-customers.html">
+                        <i class="fas fa-users"></i> العملاء
+                    </a>
+                </li>
+                <li>
+                    <a class="navbar-link" href="admin-profile.html">
+                        <i class="fas fa-user-cog"></i> ملفي
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="navbar-btn" onclick="logout(); return false;">
+                        <i class="fas fa-sign-out-alt"></i> خروج
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="container-luxury">
+            <div class="page-header">
+                <h1 class="page-title">
+                    <i class="fas fa-bell"></i> إشعارات المدير
+                </h1>
+                <p class="page-subtitle">جميع إشعارات النظام في مكان واحد</p>
+            </div>
+
+<div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterNotifications(event, 'all')">الكل</button>
+                <button class="filter-tab" onclick="filterNotifications(event, 'new')">جديد</button>
+                <button class="filter-tab" onclick="filterNotifications(event, 'orders')">الطلبات</button>
+                <button class="filter-tab" onclick="filterNotifications(event, 'users')">المستخدمين</button>
+                <button class="filter-tab complaints-tab" onclick="showComplaints()">
+                    <i class="fas fa-exclamation-circle"></i> الشكاوي
+                    <span class="complaints-count" id="complaintsCount">1</span>
+                </button>
+                <button class="filter-tab delete-all-tab" onclick="deleteAllNotifications()">
+                    <i class="fas fa-trash-alt"></i> حذف الكل
+                </button>
+            </div>
+
+            <div class="notif-page-card">
+                <ul class="notif-page-list" id="notificationsList">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="complaints-modal" id="complaintsModal">
+        <div class="complaints-modal-content">
+            <div class="complaints-modal-header">
+                <h2 class="complaints-modal-title">
+                    <i class="fas fa-exclamation-circle"></i> الشكاوي
+                </h2>
+                <button class="complaints-modal-close" onclick="closeComplaints()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="complaints-modal-body" id="complaintsList">
+            </div>
+            <div class="complaints-actions">
+                <button class="delete-all-btn" onclick="deleteAllComplaints()">
+                    <i class="fas fa-trash-alt"></i> حذف جميع الشكاوي
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/admin-notifications.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/images/image.png">
+    <title>HOME CARE | لوحة الفني</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900;950&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/technician-dashboard.css">
+</head>
+<body data-required-role="technician">
+    <div id="navbar-container"></div>
+    <div class="main-content">
+        <div class="container-luxury">
+            <div class="welcome-section">
+                <div class="welcome-content">
+                    <h2 id="welcomeMessage">مرحباً!</h2>
+                    <p>لوحة تحكم الفني ومتابعة الطلبات</p>
+                </div>
+                <div class="welcome-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3 id="totalOrders">0</h3>
+                        <p>إجمالي الطلبات</p>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3 id="pendingOrders">0</h3>
+                        <p>قيد التنفيذ</p>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3 id="completedOrders">0</h3>
+                        <p>مكتملة</p>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <a href="technician-all-orders.html" class="action-btn">
+                    <i class="fas fa-clock"></i>
+                    طلبات جديدة
+                </a>
+                <a href="technician-accepted-orders.html" class="action-btn">
+                    <i class="fas fa-clipboard-check"></i>
+                    طلباتي المقبولة
+                </a>
+                <a href="technician-completed-orders.html" class="action-btn">
+                    <i class="fas fa-star"></i>
+                    التقييمات
+                </a>
+                <a href="technician-profile.html" class="action-btn">
+                    <i class="fas fa-user-edit"></i>
+                    تعديل الملف
+                </a>
+            </div>
+            <div class="recent-orders">
+                <div class="section-header">
+                    <h3 class="section-title">آخر الطلبات</h3>
+                    <a href="technician-all-orders.html" class="view-all-link">عرض الكل</a>
+                </div>
+                <div class="orders-table-container">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>رقم الطلب</th>
+                                <th>الخدمة</th>
+                                <th>العميل</th>
+                                <th>الحالة</th>
+                                <th>التاريخ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentOrdersList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/technician-dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script>
+        fetch('navbar-technician.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,60 @@
+<nav class="navbar-luxury">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="index.html">
+            <div class="navbar-logo">
+                <i class="fas fa-home"></i>
+            </div>
+            <span class="navbar-text">HOME <span>CARE</span></span>
+        </a>
+        <ul class="navbar-menu">
+            <li>
+                <a class="navbar-link" href="technician-dashboard.html">
+                    <i class="fas fa-home"></i> الرئيسية
+                </a>
+            </li>
+            <li>
+                <a class="navbar-link" href="technician-all-orders.html">
+                    <i class="fas fa-clock"></i> الطلبات الجديدة
+                </a>
+            </li>
+            <li>
+                <a class="navbar-link" href="technician-accepted-orders.html">
+                    <i class="fas fa-clipboard-check"></i> طلباتي
+                </a>
+            </li>
+            <li>
+                <a class="navbar-link" href="technician-completed-orders.html">
+                    <i class="fas fa-star"></i> التقييمات
+                </a>
+            </li>
+            <li>
+                <a class="navbar-link" href="technician-profile.html">
+                    <i class="fas fa-user"></i> ملفي
+                </a>
+            </li>
+            <li>
+                <div class="notif-wrapper">
+                    <button class="notif-btn" id="notifButton" type="button" aria-label="فتح الإشعارات" onclick="toggleNotif(event)">
+                        <i class="fas fa-bell"></i>
+                        <span class="notif-badge" style="display: none;">0</span>
+                    </button>
+                    <div class="notif-dropdown" id="notifDropdown">
+                        <div class="notif-dropdown-header">
+                            <span class="notif-dropdown-title">الإشعارات</span>
+                            <button class="notif-mark-read" type="button" onclick="markAllAsRead()">تعليم كمقروء</button>
+                        </div>
+                        <ul class="notif-list"></ul>
+                        <div class="notif-footer">
+                            <a href="technician-notifications.html" class="notif-view-all">عرض كل الإشعارات</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="navbar-btn" onclick="logout(); return false;">
+                    <i class="fas fa-sign-out-alt"></i> خروج
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

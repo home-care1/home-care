@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/images/image.png">
+    <title>HOME CARE | طلباتي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900;950&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/customer-orders.css">
+</head>
+<body data-required-role="customer">
+
+    <div id="navbar-container"></div>
+
+    <div class="main-content">
+        <div class="orders-page">
+            <div class="orders-header">
+                <div class="orders-title">
+                    <div class="orders-title-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h1>طلباتي</h1>
+                </div>
+                <div class="header-actions">
+       
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="ابحث باسم الخدمة...">
+                    </div>
+                    <button class="delete-old-btn" onclick="deleteOldOrdersClick()" title="حذف الطلبات القديمة">
+                        <i class="fas fa-trash-alt"></i>
+                        <span>حذف الطلبات المكتملة</span>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="orders-stats">
+                <div class="stat-box">
+                    <span class="stat-number" id="totalOrders">0</span>
+                    <span class="stat-label">إجمالي الطلبات</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="pendingOrders">0</span>
+                    <span class="stat-label">في الانتظار</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="inProgressOrders">0</span>
+                    <span class="stat-label">قيد التنفيذ</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number" id="completedOrders">0</span>
+                    <span class="stat-label">مكتملة</span>
+                </div>
+            </div>
+
+            <div class="filters-bar">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-list"></i> الكل
+                </button>
+                <button class="filter-btn" data-filter="pending">
+                    <i class="fas fa-clock"></i> في الانتظار
+                </button>
+                <button class="filter-btn" data-filter="in_progress">
+                    <i class="fas fa-spinner"></i> قيد التنفيذ
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    <i class="fas fa-check-circle"></i> مكتملة
+                </button>
+            </div>
+
+            <div class="orders-grid" id="ordersList">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="ratingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <div class="modal-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>قيّم الخدمة الآن</h3>
+                </div>
+                <button class="modal-close" onclick="closeRatingModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">كيف كانت تجربة الخدمة مع الفني؟</p>
+                <div class="stars-display" id="starsDisplay">
+                    <span class="star" data-value="1" onclick="setRating(1)">★</span>
+                    <span class="star" data-value="2" onclick="setRating(2)">★</span>
+                    <span class="star" data-value="3" onclick="setRating(3)">★</span>
+                    <span class="star" data-value="4" onclick="setRating(4)">★</span>
+                    <span class="star" data-value="5" onclick="setRating(5)">★</span>
+                </div>
+                <p id="ratingText" class="rating-text"></p>
+                <input type="hidden" id="stars" value="5">
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-comment-alt"></i>
+                        تعليقك (اختياري)
+                    </label>
+                    <textarea class="form-textarea" id="ratingComment" rows="4" placeholder="شاركنا رأيك عن الخدمة..."></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeRatingModal()">
+                        <i class="fas fa-arrow-right"></i>
+                        إلغاء
+                    </button>
+                    <button class="btn-submit" onclick="submitRating()">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال التقييم
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="orderDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <div class="modal-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>تفاصيل الطلب</h3>
+                </div>
+                <button class="modal-close" onclick="closeOrderDetailsModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="order-details-content">
+                    <div class="detail-row">
+                        <span class="detail-label">رقم الطلب:</span>
+                        <span class="detail-value" id="detailOrderId"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">نوع الخدمة:</span>
+                        <span class="detail-value" id="detailService"></span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">وصف المشكلة:</span>
+                        <span class="detail-value" id="detailDescription"></span>
+                    </div>
+
+                    <div class="detail-row">
+                        <span class="detail-label">المدينة:</span>
+                        <span class="detail-value" id="detailCity"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">رقم الهاتف:</span>
+                        <span class="detail-value" id="detailPhone"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">التاريخ المفضل:</span>
+                        <span class="detail-value" id="detailPreferredDate"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">الوقت المفضل:</span>
+                        <span class="detail-value" id="detailPreferredTime"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">الحالة:</span>
+                        <span class="detail-value" id="detailStatus"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">تاريخ الإنشاء:</span>
+                        <span class="detail-value" id="detailCreatedAt"></span>
+                    </div>
+                    <div class="detail-row" id="detailTechnicianRow" style="display: none;">
+                        <span class="detail-label">الفني:</span>
+                        <span class="detail-value" id="detailTechnician"></span>
+                    </div>
+                    <div class="detail-row" id="detailNotesRow" style="display: none;">
+                        <span class="detail-label">ملاحظات:</span>
+                        <span class="detail-value" id="detailNotes"></span>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeOrderDetailsModal()">
+                        <i class="fas fa-times"></i>
+                        إغلاق
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="technicianInfoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <div class="modal-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3>معلومات الفني</h3>
+                </div>
+                <button class="modal-close" onclick="closeTechnicianInfoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="technician-info-content">
+                    <div class="technician-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="technician-details">
+                        <div class="technician-detail-row">
+                            <span class="technician-detail-label">
+                                <i class="fas fa-user"></i>
+                                الاسم:
+                            </span>
+                            <span class="technician-detail-value" id="technicianInfoName"></span>
+                        </div>
+                        <div class="technician-detail-row">
+                            <span class="technician-detail-label">
+                                <i class="fas fa-phone"></i>
+                                رقم الهاتف:
+                            </span>
+                            <span class="technician-detail-value" id="technicianInfoPhone"></span>
+                        </div>
+                        <div class="technician-detail-row">
+                            <span class="technician-detail-label">
+                                <i class="fas fa-star"></i>
+                                التقييم:
+                            </span>
+                            <span class="technician-detail-value technician-rating" id="technicianInfoRating"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeTechnicianInfoModal()">
+                        <i class="fas fa-times"></i>
+                        إغلاق
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/fix-orders.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/order-visibility.js"></script>
+    <script src="js/customer-orders.js"></script>
+    <script>
+        fetch('navbar-customer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
+
+

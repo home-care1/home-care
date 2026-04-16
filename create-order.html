@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/images/image.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء طلب صيانة | HOME CARE</title>
+    <link rel="stylesheet" href="css/create-order.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body data-required-role="customer">
+    <div id="navbar-container"></div>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1><i class="fas fa-plus-circle"></i> إنشاء طلب صيانة جديد</h1>
+                <p>املأ النموذج التالي لإنشاء طلب صيانة جديد</p>
+            </div>
+
+            <form id="orderForm" class="order-form">
+                <div class="form-section">
+                    <h2><i class="fas fa-tools"></i> نوع الخدمة</h2>
+                    <div class="service-options">
+                        <label class="service-option">
+                            <input type="radio" name="serviceType" value="كهرباء" required>
+                            <div class="service-card">
+                                <i class="fas fa-bolt"></i>
+                                <span>كهرباء</span>
+                            </div>
+                        </label>
+                        <label class="service-option">
+                            <input type="radio" name="serviceType" value="سباكة">
+                            <div class="service-card">
+                                <i class="fas fa-tint"></i>
+                                <span>سباكة</span>
+                            </div>
+                        </label>
+                        <label class="service-option">
+                            <input type="radio" name="serviceType" value="نجارة">
+                            <div class="service-card">
+                                <i class="fas fa-hammer"></i>
+                                <span>نجارة</span>
+                            </div>
+                        </label>
+                        <label class="service-option">
+                            <input type="radio" name="serviceType" value="دهان">
+                            <div class="service-card">
+                                <i class="fas fa-paint-roller"></i>
+                                <span>دهان</span>
+                            </div>
+                        </label>
+                        <label class="service-option">
+                            <input type="radio" name="serviceType" value="أخرى">
+                            <div class="service-card">
+                                <i class="fas fa-wrench"></i>
+                                <span>أخرى</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="form-group" id="customServiceTypeGroup" style="display: none;">
+                        <label for="customServiceType">نوع الخدمة المطلوبة *</label>
+                        <input type="text" id="customServiceType" name="customServiceType" placeholder="اكتب نوع الخدمة التي تريدها">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">وصف المشكلة *</label>
+                        <textarea id="description" name="description" rows="5" placeholder="اشرح تفاصيل المشكلة..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2><i class="fas fa-map-marker-alt"></i> الموقع</h2>
+                    <div class="form-group">
+                        <label for="address">العنوان *</label>
+                        <input type="text" id="address" name="address" placeholder="العنوان التفصيلي" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city">المدينة *</label>
+                            <select id="city" name="city" required>
+                                <option value="">اختر المدينة</option>
+                                <option value="ramallah">رام الله</option>
+                                <option value="nablus">نابلس</option>
+                                <option value="hebron">الخليل</option>
+                                <option value="bethlehem">بيت لحم</option>
+                                <option value="jericho">أريحا</option>
+                                <option value="jenin">جنين</option>
+                                <option value="tulkarm">طولكرم</option>
+                                <option value="qalqilya">قلقيلية</option>
+                                <option value="salfit">سلفيت</option>
+                                <option value="tubas">طوباس</option>
+                                <option value="jerusalem">القدس</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="0599123456" pattern="[0-9]+" title="يرجى إدخال أرقام فقط" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2><i class="fas fa-calendar-alt"></i> الموعد المفضل</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="preferredDate">التاريخ *</label>
+                            <input type="date" id="preferredDate" name="preferredDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredTime">الوقت *</label>
+                            <select id="preferredTime" name="preferredTime" required>
+                                <option value="">اختر الوقت</option>
+                                <option value="morning">صباحاً (8:00 - 12:00)</option>
+                                <option value="afternoon">بعد الظهر (12:00 - 4:00)</option>
+                                <option value="evening">مساءً (4:00 - 8:00)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2><i class="fas fa-sticky-note"></i> ملاحظات إضافية</h2>
+                    <div class="form-group">
+                        <label for="notes">ملاحظات</label>
+                        <textarea id="notes" name="notes" rows="3" placeholder="أي ملاحظات إضافية..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="window.location.href='customer-dashboard.html'">
+                        <i class="fas fa-times"></i> إلغاء
+                    </button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-paper-plane"></i> إرسال الطلب
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+<div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon success">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>تم إنشاء الطلب بنجاح!</h2>
+            <p id="orderIdDisplay">رقم الطلب: </p>
+            <p>سيتم التواصل معك قريباً من قبل الفني المناسب</p>
+            <div class="modal-actions">
+                <button onclick="window.location.href='customer-orders.html'" class="btn-primary">
+                    <i class="fas fa-list"></i> عرض طلباتي
+                </button>
+                <button onclick="window.location.href='customer-dashboard.html'" class="btn-secondary">
+                    <i class="fas fa-home"></i> العودة للرئيسية
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/create-order.js"></script>
+    <script>
+        fetch('navbar-customer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
+

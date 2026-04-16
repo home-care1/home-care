@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="assets/images/image.png">
+    <title>HOME CARE | الطلبات - المدير</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900;950&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admin-orders.css">
+</head>
+<body data-required-role="admin">
+
+ <div id="navbar-container"></div>
+
+    <div class="main-content">
+        <div class="container-luxury">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">إدارة الطلبات</h1>
+                    <p class="page-subtitle">عرض ومراقبة جميع طلبات الخدمة</p>
+                </div>
+                <button class="delete-old-btn" onclick="adminDeleteOldOrders()" title="حذف الطلبات المكتملة">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>حذف المكتملة</span>
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="totalOrders">0</div>
+                        <div class="stat-label">إجمالي الطلبات</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="pendingOrders">0</div>
+                        <div class="stat-label">في الانتظار</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon completed">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="completedOrders">0</div>
+                        <div class="stat-label">مكتمل</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon cancelled">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <div class="stat-number" id="cancelledOrders">0</div>
+                        <div class="stat-label">ملغي</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-filter-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="البحث في الطلبات...">
+                </div>
+            </div>
+
+            <div class="filters-bar">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-list"></i> الكل
+                </button>
+                <button class="filter-btn" data-filter="pending">
+                    <i class="fas fa-clock"></i> في الانتظار
+                </button>
+                <button class="filter-btn" data-filter="accepted">
+                    <i class="fas fa-check"></i> مقبول
+                </button>
+                <button class="filter-btn" data-filter="in_progress">
+                    <i class="fas fa-spinner"></i> قيد التنفيذ
+                </button>
+                <button class="filter-btn" data-filter="completed">
+                    <i class="fas fa-check-circle"></i> مكتمل
+                </button>
+                <button class="filter-btn" data-filter="cancelled">
+                    <i class="fas fa-times-circle"></i> ملغي
+                </button>
+            </div>
+
+            <div class="orders-grid" id="ordersList">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-clipboard-list"></i>
+                    تفاصيل الطلب
+                </h2>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/fix-orders.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/order-visibility.js"></script>
+    <script src="js/admin-orders.js"></script>
+    <script>
+        fetch('navbar-admin.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            });
+    </script>
+
+</body>
+</html>
+
